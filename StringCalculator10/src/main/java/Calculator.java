@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 public class Calculator {
     public static int add(String numbers) throws Exception {
         String strNegative = "";
+        String[] listDelimiter = null;
         String strDelimiter = "";
         String strNumber = "";
         String[] listNumber = null;
@@ -15,9 +16,13 @@ public class Calculator {
             return 0;
         } else {
             if (numbers.startsWith("//[")) {
-                String[] beforeDelimiter = numbers.split("\\[");
-                String delimiter = beforeDelimiter[1].split("]")[0];
-                strDelimiter = "\n" + "|" + Pattern.quote(delimiter);
+                strDelimiter = "\n";
+                listDelimiter = numbers.split("\\[");
+                for (int i = 0; i < listDelimiter.length; i++) {
+                    if (i >= 1) {
+                        strDelimiter += "|" + Pattern.quote(listDelimiter[i].split("]")[0]);
+                    }
+                }
                 strNumber = numbers.split("\n")[1];
             } else if (numbers.startsWith("//")) {
                 strDelimiter = numbers.substring(2,3) + "|\n";
@@ -42,4 +47,3 @@ public class Calculator {
         }
     }
 }
-
