@@ -59,8 +59,12 @@ public class CalculatorTest {
     }
 
     @Test
-    public void testCustomDelimiters() throws Exception {
+    public void testCustomAnyDelimiter() throws Exception {
         assertEquals(Calculator.add("//[*][%]\n1*2%3"), 6);
     }
 
+    @Test
+    public void testCustomAnyLengthDelimiter() throws Exception {
+        assertEquals(Calculator.add("//[***][*][%][##]\n1***2*3%4##5"), 15);
+    }
 }
