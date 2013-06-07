@@ -14,9 +14,14 @@ public class Calculator {
         if (numbers.isEmpty()) {
             return 0;
         } else {
-            if (numbers.startsWith("//")) {
+            if (numbers.startsWith("//[")) {
+                String[] beforeDelimiter = numbers.split("\\[");
+                String delimiter = beforeDelimiter[1].split("]")[0];
+                strDelimiter = "\n" + "|" + Pattern.quote(delimiter);
+                strNumber = numbers.split("\n")[1];
+            } else if (numbers.startsWith("//")) {
                 strDelimiter = numbers.substring(2,3) + "|\n";
-                strNumber = numbers.substring(2);
+                strNumber = numbers.split("\n")[1];
             } else if (numbers.contains(",")){
                 strDelimiter = ",|\n";
                 strNumber = numbers;
@@ -37,3 +42,4 @@ public class Calculator {
         }
     }
 }
+
